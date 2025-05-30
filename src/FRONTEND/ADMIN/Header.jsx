@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 import "./Style/Header.css"; // Import CSS file
 const Header = () => {
   return (
@@ -22,7 +23,10 @@ const Header = () => {
             </li>
             <li>
               <Link className="nav-link" to="/Adminpenal">
-                Log-Out
+           
+                  <FiLogOut style={{color: "red" }}size={30} />
+                
+              
               </Link>
             </li>
           </ul>
@@ -41,9 +45,8 @@ const Header = () => {
 
           {/* Category Links (No Dropdown) */}
           <li>
-            <Link to="/categorylist">Product Category     &     Sub_Category</Link>
+            <Link to="/categorylist">Product Category & Sub_Category</Link>
           </li>
-         
 
           <li>
             <Link to="/complainlist">Complain</Link>

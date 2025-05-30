@@ -16,20 +16,29 @@ const ServiceProviderList = () => {
   }, []);
 
   const deleteServiceProvider = async (serviceProviderId) => {
-    if (window.confirm("Are you sure ? you want to delete service Provider??")) {
+    if (!serviceProviderId) {
+      console.error("Invalid service provider ID");
+      return;
+    }
+
+    if (
+      window.confirm("Are you sure? You want to delete this Service Provider?")
+    ) {
       try {
         await axios.delete(
           `http://localhost:5000/serviceprovider/${serviceProviderId}`
         );
 
-        setServiceProviders(
-          serviceProviders.filter(
-              (provider) => provider.service_provider_id !== serviceProviderId
+        setServiceProviders((prev) =>
+          prev.filter(
+            (provider) => provider.serviceprovider_id !== serviceProviderId
           )
-      );
-        
+        );
+
+        alert("Service Provider Deleted Successfully!");
       } catch (error) {
         console.error("Error deleting service provider:", error);
+        alert("An error occurred while deleting the service provider.");
       }
     }
   };
@@ -47,7 +56,7 @@ const ServiceProviderList = () => {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Address</th>
+
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Password</th>
@@ -59,7 +68,7 @@ const ServiceProviderList = () => {
                 <tr key={provider.serviceprovider_id}>
                   <td>{provider.serviceprovider_id}</td>
                   <td>{provider.serviceprovider_name}</td>
-                  <td>{provider.serviceprovider_address}</td>
+
                   <td>{provider.serviceprovider_contact}</td>
                   <td>{provider.serviceprovider_email}</td>
                   <td>{provider.password}</td>
@@ -67,8 +76,8 @@ const ServiceProviderList = () => {
                     <button
                       className="delete-btn"
                       onClick={() =>
-                        deleteServiceProvider(provider.service_provider_id)
-                      }
+                        deleteServiceProvider(provider.serviceprovider_id)
+                      } // Ensure correct ID
                     >
                       Delete
                     </button>

@@ -1,0 +1,112 @@
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 50%;
+  }
+  
+  .category-dropdown {
+    border: none;
+    background: none;
+    font-weight: bold;
+    padding: 5px;
+    outline: none;
+  }
+  
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+  }
+  
+  .search-btn {
+    background: transparent !important;  /* Removes background color */
+    border: none;                      /* Removes any border */
+    padding: 8px;                      /* Adds some spacing */
+    border-radius: 50%;                /* Makes the button circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;                   /* Makes it clickable */
+    transition: 0.3s;                  /* Smooth hover effect */
+  }
+  
+  .search-btn:hover {
+    background: rgba(0, 0, 0, 0.1);    /* Light hover effect */
+  }
+  
+  .search-btn svg {
+    color: black;                      /* Makes the icon black */
+    font-size: 18px;                   /* Adjusts the icon size */
+  }
+  .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background:black;   /* Badge color */
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+
+  /* --- Responsive Design --- */
+
+/* For tablets */
+@media screen and (max-width: 991px) {
+  .search-container {
+      width: 75%;
+      padding: 8px 12px;
+  }
+
+  .category-dropdown, .search-input, .search-btn {
+      font-size: 14px;
+  }
+
+  .search-btn {
+      padding: 6px 14px;
+  }
+}
+
+/* For smaller tablets and large phones */
+@media screen and (max-width: 768px) {
+  .search-container {
+      width: 90%;
+      padding: 6px 10px;
+  }
+
+  .category-dropdown, .search-input {
+      font-size: 14px;
+  }
+
+  .search-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+  }
+}
+
+/* For mobile screens */
+@media screen and (max-width: 480px) {
+  .search-container {
+      width: 100%;
+      padding: 5px 8px;
+      flex-direction: column; /* Stack vertically on small screens */
+  }
+
+  .category-dropdown, .search-input, .search-btn {
+      width: 100%;
+      font-size: 14px;
+      margin-bottom: 8px; /* Add spacing between stacked items */
+  }
+
+  .search-btn {
+      padding: 8px;
+  }
+}

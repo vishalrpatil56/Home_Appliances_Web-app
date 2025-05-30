@@ -1,128 +1,109 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import "./Style/Loginpage.css";
+import { Link } from "react-router-dom";
+import Header1 from "./Header1";
 
-const RegistrationPage = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const UserRegistrationPage = () => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    userContact: "",
+    userEmail: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-    if (!username || !email || !password || !confirmPassword) {
-      setError('All fields are required!');
-      return;
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    
+
+
+    const { userName, userContact, userEmail, password, confirmPassword } = formData;
+
+    // if (password !== confirmPassword) {
+    //   setError("Passwords do not match.");
+    //   return;
+    // }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/serviceproviderregister", {
+        userName,
+        userContact,
+        userEmail,
+        password,
+      });
+      setSuccess(response.data.message);
+      setFormData({ userName: "", userContact: "", userEmail: "", password: "",});
+    } catch (err) {
+      setError(err.response?.data?.error || "Registration failed.");
     }
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match!');
-      return;
-    }
-
-    setError('');
-    setLoading(true);
-
-    // Simulating registration
-    setTimeout(() => {
-      if (email === 'user@example.com') {
-        setError('Email already registered!');
-        setLoading(false);
-      } else {
-        alert('Registration successful!');
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setLoading(false);
-      }
-    }, 1500);
   };
 
   return (
-    <div className="center-container">
-    <div 
-      className="container-fluid d-flex justify-content-center align-items-center" 
-      style={{ 
-        height: '100vh', 
-        backgroundColor: '#f4f7f6', 
-        display: 'flex', 
-        flexDirection: 'column' 
-      }}
-    >
-      <div className="card p-4 shadow" style={{ width: '400px', borderRadius: '10px', backgroundColor: '#fff' }}>
-        <h2 className="text-center mb-4" style={{ color: '#607d8b' }}>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label" style={{ color: '#607d8b' }}>Username</label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-              style={{ borderColor: '#607d8b', borderRadius: '8px' }}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label" style={{ color: '#607d8b' }}>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              style={{ borderColor: '#607d8b', borderRadius: '8px' }}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label" style={{ color: '#607d8b' }}>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              style={{ borderColor: '#607d8b', borderRadius: '8px' }}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label" style={{ color: '#607d8b' }}>Confirm Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm your password"
-              style={{ borderColor: '#607d8b', borderRadius: '8px' }}
-            />
-          </div>
-
+    <>
+    
+      
+      <div className="center-container">
+      <div style={{ textAlign: "center", marginTop: "1px" }}>
+          <h1
+            style={{ fontSize: "40px", fontWeight: "bold", color: "black", transition: "0.3s" }}
+            onMouseEnter={(e) => (e.target.style.color = "blue")}
+            onMouseLeave={(e) => (e.target.style.color = "black")}
+          >
+            Welcome, <span style={{ color: "blue" }}>Please Create an Account</span>.
+          </h1>
+          <h4
+            style={{ fontSize: "18px", color: "gray", transition: "0.3s" }}
+            onMouseEnter={(e) => (e.target.style.color = "black")}
+            onMouseLeave={(e) => (e.target.style.color = "gray")}
+          >
+            Create a strong password... 👤🔏
+          </h4>
           {error && <div className="alert alert-danger">{error}</div>}
-
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary" disabled={loading} style={{ backgroundColor: '#607d8b', borderRadius: '8px' }}>
-              {loading ? 'Registering...' : 'Register'}
-            </button>
-          </div>
-        </form>
-
-        <div className="text-center mt-3">
-          <p>Already have an account? <Link to="/login" style={{ color: '#607d8b' }}>Login here</Link></p>
+          {success && <div className="alert alert-success">{success}</div>}
+        </div>
+        <div className="login-card">
+          <h1 className="title">
+             <span style={{ color: "blue" }}>Register</span>
+          </h1>
+         
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input type="text" name="userName" value={formData.userName} onChange={handleChange} className="input-field" placeholder="Enter Username" required />
+            </div>
+            <div className="form-group">
+              <label>Contact Number:</label>
+              <input type="text" name="userContact" value={formData.userContact} onChange={handleChange} className="input-field" placeholder="Enter Contact Number" required />
+            </div>
+            <div className="form-group">
+              <label>Email:</label>
+              <input type="email" name="userEmail" value={formData.userEmail} onChange={handleChange} className="input-field" placeholder="Enter Email" required />
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input type="password" name="password" value={formData.password} onChange={handleChange} className="input-field" placeholder="Enter Password" required />
+            </div>
+          
+            <p>
+              Already have an account? <Link to="/loginpage">Login here</Link>
+            </p>
+            <button type="submit" className="login-button">Register</button>
+          </form>
         </div>
       </div>
-    </div>
-    </div>
+    </>
   );
 };
 
-export default RegistrationPage;
+export default UserRegistrationPage;

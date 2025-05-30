@@ -10,9 +10,6 @@ function CategoryForm({ category, fetchCategories, setSelectedCategory }) {
     if (category) {
       setName(category.productcategory_name);
       setDescription(category.productcategory_description);
-    } else {
-      setName("");
-      setDescription("");
     }
   }, [category]);
 
@@ -21,87 +18,61 @@ function CategoryForm({ category, fetchCategories, setSelectedCategory }) {
       setNameError("Name is required");
       return false;
     }
-
-    const hasNumbers = /\d/.test(name);
-    const isEmailLike = /@/.test(name);
-
-    if (hasNumbers || isEmailLike) {
+    if (/\d/.test(name) || /@/.test(name)) {
       setNameError("Name cannot contain numbers or email patterns");
       return false;
     }
-
-    setNameError(""); // Clear any previous error
+    setNameError("");
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateName()) {
-      return;
-    }
+    if (!validateName()) return;
 
     try {
-      if (category) {
-        await axios.put(
-          `http://localhost:5000/categories/${category.productcategory_id}`,
-          {
-            name,
-            description,
-          }
-        );
-      } else {
-        await axios.post("http://localhost:5000/categories", {
-          name,
-          description,
-        });
-      }
+      await axios.put(
+        `http://localhost:5000/categories/${category.productcategory_id}`,
+        { name, description }
+      );
       fetchCategories();
-      setName("");
-      setDescription("");
-      if (setSelectedCategory) {
-        setSelectedCategory(null);
-      }
+      setSelectedCategory(null);
     } catch (error) {
-      console.error("Error saving category:", error);
+      console.error("Error updating category:", error);
     }
   };
 
   return (
-    <form className="category-form" onSubmit={handleSubmit}>
-      <h2>{category ? "Edit Category" : "Add Category"}</h2>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            validateName();
-          }}
-          required
-        />
-        {nameError && <p className="error-message">{nameError}</p>}
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea
-          value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-            
-          }}
-          required
-
-        />
-      </div>
-      <button type="submit">Save</button>
-      {setSelectedCategory && category && (
+    category && (
+      <form className="category-form" onSubmit={handleSubmit}>
+        <h2>Edit Category</h2>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              validateName();
+            }}
+            required
+          />
+          {nameError && <p className="error-message">{nameError}</p>}
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Save</button>
         <button type="button" onClick={() => setSelectedCategory(null)}>
           Cancel
         </button>
-      )}
-    </form>
+      </form>
+    )
   );
 }
 

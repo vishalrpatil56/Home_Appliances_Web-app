@@ -17,8 +17,8 @@ const Home = () => {
      <Header/>
       <div className="home-container">
         <img
-          src="https://wallpaperaccess.com/full/6424688.png"
-          alt="Placeholder Image"
+          src="public/6424688.webp"
+          alt="Image"
           className={`custom-image ${fadeIn ? "fade-in-zoom" : ""}`}
         />
       </div>

@@ -23,7 +23,7 @@ const ComplainList = () => {
               <tr>
                 <th> ID</th>
                 <th> DESCRIPTION</th>
-                <th> USER_ID</th>
+                <th> ServicProvider_Id</th>
                 <th></th>
               </tr>
             </thead>
@@ -32,9 +32,9 @@ const ComplainList = () => {
                 <tr key={Complain.complain_id}>
                   <td>{Complain.complain_id}</td>
                   <td>{Complain.complain_description}</td>
-                  <td>{Complain.user_id}</td>
+                  <td>{Complain.serviceprovider_id}</td>
                   <td>
-                    <button className="delete-btn"> Delete</button>
+                  📝 ❗
                   </td>
                 </tr>
               ))}

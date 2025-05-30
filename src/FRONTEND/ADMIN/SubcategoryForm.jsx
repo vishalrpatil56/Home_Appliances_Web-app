@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
+import "./Style/CategoryList.css"
 function SubcategoryForm({
   categoryId,
   subcategory,
@@ -42,49 +41,29 @@ function SubcategoryForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateName()) {
-      return;
-    }
+    if (!validateName()) return;
 
     try {
       if (subcategory) {
-        console.log("Subcategory ID to update:", subcategory.p_sub_cata_id);
-        console.log("Data to send for update:", {
-          name,
-          description,
-          category_id: categoryId,
-        });
         await axios.put(
           `http://localhost:5000/subcategories/${subcategory.p_sub_cata_id}`,
-          {
-            name,
-            description,
-            category_id: categoryId,
-          }
+          { name, description, category_id: categoryId }
         );
       } else {
         await axios.post(
           `http://localhost:5000/categories/${categoryId}/subcategories`,
-          {
-            name,
-            description,
-          }
+          { name, description }
         );
       }
-      fetchSubcategories();
-      setName("");
-      setDescription("");
-      if (setSelectedSubcategory) {
-        setSelectedSubcategory(null);
-      }
+      fetchSubcategories(); // Refresh list
+      setSelectedSubcategory(null); // Close form
     } catch (error) {
       console.error("Error saving subcategory:", error);
     }
   };
 
   return (
-    <form className="category-form" onSubmit={handleSubmit}>
+    <form className="subcategory-form" onSubmit={handleSubmit}>
       <h2>{subcategory ? "Edit Subcategory" : "Add Subcategory"}</h2>
       <div>
         <label>Name:</label>
@@ -108,7 +87,7 @@ function SubcategoryForm({
         />
       </div>
       <button type="submit">Save</button>
-      {setSelectedSubcategory && subcategory && (
+      {subcategory && (
         <button type="button" onClick={() => setSelectedSubcategory(null)}>
           Cancel
         </button>

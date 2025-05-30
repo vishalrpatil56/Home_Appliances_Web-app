@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Nav, Navbar, Container } from "react-bootstrap";
-import "./Style/Header1.css"
+import "./Style/Header1.css";
+import { FiLogOut } from "react-icons/fi";
+import { LiaBuyNLarge } from "react-icons/lia";
 const Header1 = () => {
   const [productDropdown, setProductDropdown] = useState(false);
   const [complainDropdown, setComplainDropdown] = useState(false);
@@ -10,26 +12,24 @@ const Header1 = () => {
 
   return (
     <header>
-   
       <nav className="navbar navbar-expand-lg navbar-dark bg-black">
         <div className="container-fluid">
           <div
             className="collapse navbar-collapse justify-content-center"
             id="navbarNav"
           >
-            <img
-            src="public/Untitled design.png"
+           
+           <Link to={"/serviceproviderdash"}><img
+              src="public/Untitled design.png"
               alt="logo"
-             
               height="auto"
               className="me-3"
-              style={{ width:"250px",marginLeft:"25px"}}
-              
-            />
-          
+              style={{ width: "250px", marginLeft: "25px" }}
+            /></Link> 
+
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link active text-white px-3" to="/">
+                <Link className="nav-link active text-white px-3" to="/serviceproviderdash">
                   HOME
                 </Link>
               </li>
@@ -58,7 +58,7 @@ const Header1 = () => {
                     }}
                   >
                     <Dropdown.Item
-                      href="#"
+                      
                       style={{
                         color: "white",
                         padding: "10px 20px",
@@ -70,40 +70,25 @@ const Header1 = () => {
                       }
                       onMouseLeave={(e) =>
                         (e.target.style.backgroundColor = "transparent")
+                        
                       }
-                    >
-                      Product Details
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href="#"
-                      style={{
-                        color: "white",
-                        padding: "10px 20px",
-                        fontSize: "16px",
-                        transition: "background 0.3s ease-in-out",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "black")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "transparent")
-                      }
-                    >
-                      Service Details
+                    ><Link
+                    className="nav-link text-white px-1"
+                    to="/productdetails"
+                  >
+                    Product Details
+                  </Link>
+                      
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white px-3" to="/productorder">
+                <Link className="nav-link text-white px-3" to="/customerorders">
                   PRODUCT ORDERS
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link text-white px-3" to="/servicerequest">
-                  SERVICE REQUEST
-                </Link>
-              </li>
+              
               <li
                 className="nav-item dropdown"
                 onMouseEnter={() => setComplainDropdown(true)}
@@ -120,14 +105,14 @@ const Header1 = () => {
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     style={{
-                      minWidth: "180px", // Ensures a minimum size
+                      minWidth: "220px", // Ensures a minimum size
                       backgroundColor: "#333", // Matches navbar dark theme
                       borderRadius: "8px", // Smooth rounded corners
                       border: "none", // Removes sharp border
                     }}
                   >
                     <Dropdown.Item
-                      href="#"
+                      
                       style={{
                         color: "white",
                         padding: "10px 20px",
@@ -141,15 +126,16 @@ const Header1 = () => {
                         (e.target.style.backgroundColor = "transparent")
                       }
                     >
-                      My Complains
+                      <Link className="nav-link text-white px-1"to={"/serviceprovidercomplain"}>My Complaints</Link>
+                      
                     </Dropdown.Item>
                     <Dropdown.Item
-                      href="#"
+                      
                       style={{
                         width: "auto",
                         color: "white",
                         padding: "10px 20px",
-                        fontSize: "16px",
+                        fontSize: "5px",
                         transition: "background 0.3s ease-in-out",
                       }}
                       onMouseEnter={(e) =>
@@ -159,7 +145,7 @@ const Header1 = () => {
                         (e.target.style.backgroundColor = "transparent")
                       }
                     >
-                      Customer Complains
+                       <Link className="nav-link text-white "to={"/customercompaints"}>Customer Complaints </Link>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -180,7 +166,7 @@ const Header1 = () => {
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     style={{
-                      minWidth: "180px", // Ensures a minimum size
+                      minWidth: "220px", // Ensures a minimum size
                       backgroundColor: "#333", // Matches navbar dark theme
                       borderRadius: "8px", // Smooth rounded corners
                       border: "none", // Removes sharp border
@@ -201,15 +187,18 @@ const Header1 = () => {
                         (e.target.style.backgroundColor = "transparent")
                       }
                     >
-                      My Feedbacks
+
+
+<Link className="nav-link text-white px-1"to={"/serviceproviderfeedback"}> My Feedbacks</Link>
+                     
                     </Dropdown.Item>
                     <Dropdown.Item
-                      href="#"
+                     
                       style={{
                         width: "auto",
                         color: "white",
-                        padding: "10px 20px",
-                        fontSize: "16px",
+                        // padding: "10px 20px",
+                        fontSize: "5px",
                         transition: "background 0.3s ease-in-out",
                       }}
                       onMouseEnter={(e) =>
@@ -219,18 +208,16 @@ const Header1 = () => {
                         (e.target.style.backgroundColor = "transparent")
                       }
                     >
-                      Customer Feedbacks
+                      <Link className="nav-link text-white "to={"/customerfeedbacklist"}>Customer Feedbacks</Link>
+                    
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                
               </li>
               <li className="nav-item">
-                <Link
-                  to={toggle ? "/loginpage" : "/registrationpage : /forgot-password"}
-                  className="nav-link text-white px-3"
-                  onClick={() => setToggle(!toggle)}
-                >
-                  LOGIN
+                <Link className="nav-link" to="/loginpage">
+                  <FiLogOut style={{ color: "red" }} size={30} />
                 </Link>
               </li>
             </ul>

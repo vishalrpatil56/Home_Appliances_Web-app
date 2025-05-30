@@ -47,9 +47,30 @@ const LoginPage = () => {
   return (
     <>
       {/* <Header /> */}
-      <br /><br /><br /><br />
+   
+<br />
+      <div className="content">
+      <div style={{ textAlign: "center", marginTop: "10px" }}>
+  <h1
+    style={{ fontSize: "32px", fontWeight: "bold", color: "black", transition: "0.3s" }}
+    onMouseEnter={(e) => (e.target.style.color = "blue")}
+    onMouseLeave={(e) => (e.target.style.color = "black")}
+  >
+    Welcome Back, <span style={{ color: "blue" }}>Admin</span>.
+  </h1>
+
+  <h4
+    style={{ fontSize: "18px", color: "gray", transition: "0.3s" }}
+    onMouseEnter={(e) => (e.target.style.color = "black")}
+    onMouseLeave={(e) => (e.target.style.color = "gray")}
+  >
+    Please login to continue...
+  </h4>
+</div>
+  
+    </div>
       <div className="center-container">
-        <div className="login-card">
+        <div className="login-card" style={{height:"500px"}}>
           <h1 className="title">Login</h1>
           {error && <div className="error">{error}</div>}
           <form onSubmit={handleSubmit}>
@@ -89,7 +110,7 @@ const LoginPage = () => {
             <button type="submit" className="login-button">Login</button>
           </form>
           <br />
-          <h3>Welcome Back Admin.</h3>  <h5> Please login.....</h5>
+         
         </div>
       </div>
     </>

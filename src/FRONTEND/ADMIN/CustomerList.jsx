@@ -43,7 +43,7 @@ const CustomerList = () => {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Address</th>
+            
               <th>Phone</th>
               <th>Email</th>
               <th>Password </th>
@@ -55,7 +55,7 @@ const CustomerList = () => {
               <tr key={customer.user_id}>
                 <td>{customer.user_id}</td>
                 <td>{customer.user_name}</td>
-                <td>{customer.user_address}</td>
+               
                 <td>{customer.user_contact}</td>
                 <td>{customer.user_email}</td>
                 <td>{customer.password} </td>

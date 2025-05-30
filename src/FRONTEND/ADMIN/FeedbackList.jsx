@@ -24,7 +24,7 @@ const FeedbackList = () => {
             <tr>
               <th>ID</th>
               <th>DESCRIPTION</th>
-              <th>USER_ID</th>
+              <th>ServicProvider_Id</th>
               <th></th>
             </tr>
           </thead>
@@ -33,9 +33,8 @@ const FeedbackList = () => {
               <tr key={feedback.feedback_id}>
                 <td>{feedback.feedback_id}</td>
                 <td>{feedback.feedback_description}</td>
-                <td>{feedback.user_id}</td>
-                <td>
-                  <button className="delete-btn"> Delete</button>
+                <td>{feedback.serviceprovider_id}</td>
+                <td>👍💬 ✅
                 </td>
               </tr>
             ))}
