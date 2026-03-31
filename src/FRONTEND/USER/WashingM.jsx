@@ -46,7 +46,7 @@ const WashingM = () => {
     
     const cartItem = {
       id: product.product_id, // Unique ID
-      image: `http://localhost:5000/uploads/${product.product_image}`, // Full image URL
+      image: `/Washing/${product.product_image}`, // Full image URL
       name: product.product_name,
       description: product.product_description,
       price: product.product_price,
@@ -88,7 +88,7 @@ const WashingM = () => {
                     className="card product-card shadow-sm h-100"
                   >
                 <img
-                      src={`http://localhost:5000/uploads/${product.product_image}`}
+                      src={`/Washing/${product.product_image}`}
                       className="card-img"
                       alt={product.product_name}
                       style={{ height: "275px" }}
@@ -144,7 +144,7 @@ const WashingM = () => {
                     className="card product-card shadow-sm h-100"
                   >
                     <img
-                      src={`http://localhost:5000/uploads/${product.product_image}`}
+                      src={`/Washing/${product.product_image}`}
                       className="card-img"
                       alt={product.product_name}
                       style={{ height: "275px" }}

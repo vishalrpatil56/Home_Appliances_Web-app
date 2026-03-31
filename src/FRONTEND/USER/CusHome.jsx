@@ -18,17 +18,17 @@ const slides = [
   {
     image: "Ac.png", // Replace with actual image path
     
-    description: "Top And Higher Quality Home Appliances",
+    //description: "Top And Higher Quality Home Appliances",
   },
   {
     image: "Machine.png",
     
-    description: "Top And Higher Quality Home Appliances",
+    //description: "Top And Higher Quality Home Appliances",
   },
   {
     image: "Tv.png",
     
-    description: "Top And Higher Quality Home Appliances",
+    //description: "Top And Higher Quality Home Appliances",
   },
 ];
 const categories = [
@@ -36,7 +36,8 @@ const categories = [
     { name: "Air Conditioners", img: "air.png",link:"/aircon" },
     { name: "Refrigrators", img: "ref.png",link:"/fridge" },
     { name: "Telivisions", img: "tel.png",link:"/telivision" },
-    // { name: "Irons", img: "iron.png" },
+  { name: "RO Water Purifier", img: "ro.png", link:"/waterpurifier" }
+    //  { name: "Irons", img: "iron.png" },
     // { name: "Water Heaters", img: "waterheater.png" },
     // { name: "Mixers", img: "/mixer.png" },
     // { name: "Vaccum Cleaners", img: "Vc.png" },
@@ -113,22 +114,38 @@ const CusHome = () => {
             Our expert technicians and premium products ensure customer
             satisfaction at the best prices.
           </p>
+          <div style={{ marginTop: "20px" }}>
+  <h3>Our Location</h3>
+
+  <iframe
+    src="https://www.google.com/maps?q=Green+Park+Nipani&output=embed"
+    width="100%"
+    height="300"
+    style={{ border: 0, borderRadius: "12px" }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
         </Col>
 
     {/* Contact Us Section */}
     <Col md={4} className="mb-4 ms-auto slideInRight">
         <h1 className="fw-bold" style={{fontSize:"50px"}}>Contact us : </h1>
-          <p>Email: support@homeappliances.com</p>
-          <p>Phone: +91 8200221828</p>
-          <p>Location: NAVGUJARAT COLLEGE OF COMPUTER APPLICATIONS</p>
+          <p><b><h3>Balaji Enterprise</h3></b></p>
+          <p>Email: np65925603@gmail.com</p>
+          <p>Phone: +91 9535345080, +91 8123892151</p>
+          <p>Location: Green Park, Nipani</p>
           <br />
-          <div className="d-flex gap-3 mt-2">
+          
+          {/*<div className="d-flex gap-3 mt-2">
           <h4> <strong>Follow Us On :           </strong></h4>  
             
             <a href="https://facebook.com" className="text-light fs-4">
               <FaFacebook style={{ color: "blue", fontSize: "40px" }} />
             </a>
             <a href="https://instagram.com" className="text-light fs-4">
+            
               <FaInstagram
                 style={{
                   fontSize: "40px",
@@ -138,7 +155,7 @@ const CusHome = () => {
                 }}
               />
             </a>
-          </div>
+          </div>*/}
         </Col>
 
    

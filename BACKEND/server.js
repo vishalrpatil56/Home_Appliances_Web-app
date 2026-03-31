@@ -18,7 +18,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "root",
   database: "home_appliances_db",
 });
 
@@ -377,6 +377,23 @@ app.delete("/subcategories/:id", async (req, res) => {
   }
 });
 
+// DELETE PRODUCT (ADMIN)
+app.delete("/api/delete-product/:id", (req, res) => {
+  const productId = req.params.id;
+
+  db.query(
+    "DELETE FROM product_details WHERE product_id = ?",
+    [productId],
+    (err) => {
+      if (err) {
+        console.error("Delete error:", err);
+        return res.status(500).send("Error deleting product");
+      }
+      res.send("Product deleted successfully");
+    }
+  );
+});
+
 //***************************************  SERVICE PROVIDER  Api  *********************************************************************************************************** */
 app.post("/api/serviceproviderregister", async (req, res) => {
   const { userName, userContact, userEmail, password } = req.body;
@@ -701,28 +718,52 @@ app.post("/api/register", async (req, res) => {
 
 // User login route
 app.post("/api/login", (req, res) => {
-  const { email, password } = req.body;
+  const { userEmail, email, password } = req.body;
+
+  // Accept both formats (userEmail or email)
+  const finalEmail = userEmail || email;
+
+  console.log("Login Data:", req.body); // ✅ moved inside
 
   db.query(
     "SELECT * FROM user WHERE user_email = ?",
-    [email],
+    [finalEmail],
     (err, results) => {
-      if (err) return res.status(500).send("Server Error");
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Server Error");
+      }
+
       if (results.length === 0) {
-        return res.status(400).json({ success: false, message: "Invalid credentials" });
+        return res.status(400).json({
+          success: false,
+          message: "Invalid email",
+        });
       }
 
       const user = results[0];
+
+      // Password check
       if (user.password !== password) {
-        return res.status(400).json({ success: false, message: "Invalid credentials" });
+        return res.status(400).json({
+          success: false,
+          message: "Invalid password",
+        });
       }
 
-      // Generate JWT token
-      const token = jwt.sign({ userId: user.user_id }, "your_jwt_secret", {
-        expiresIn: "1h",
-      });
+      // Generate token
+      const token = jwt.sign(
+        { userId: user.user_id },
+        "your_jwt_secret",
+        { expiresIn: "1h" }
+      );
 
-      res.json({ success: true, token, user_id: user.user_id });
+      res.json({
+        success: true,
+        token,
+        user_id: user.user_id,
+        user_name: user.user_name,
+      });
     }
   );
 });
